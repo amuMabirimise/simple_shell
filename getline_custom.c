@@ -44,7 +44,7 @@ char *getline_cust(void)
 		i++;
 	}
 	buffer[i - 1] = '\0';
-	remwspaces(buffer);
+	removewspaces(buffer);
 	remove_comment_hash(buffer);
 	return (buffer);
 }

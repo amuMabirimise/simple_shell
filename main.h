@@ -132,8 +132,8 @@ int _setenv(const char *name, const char *value);
 void add_env_var(struct Node **head, const char *name, const char *value);
 void update_environ(struct Node *head);
 void handle_sigint(int signo __attribute__((unused)));
-void remwspaces(char *s);
-int wspace(char s);
+void removewspaces(char *s);
+int whitespace(char s);
 
 
 

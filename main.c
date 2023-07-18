@@ -28,7 +28,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 			exit(ex_code);
 		if (cmd[0] == '\0' || (str_cmp(cmd, "\n") == 0))
 			continue;
-		remwspaces(cmd);
+		removewspaces(cmd);
 		cmd_copy = strdup(cmd);
 		tokenize_str(cmd_copy, ar);
 		tokenize_str(cmd, argv);
@@ -59,13 +59,13 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 }
 
 /**
- * wspace - check character space or tab
+ * whitespace - check character space or tab
  * @s: character to be checked
  *
  * Return: 1 if successful or 0 if not.
  */
 
-int wspace(char s)
+int whitespace(char s)
 {
 	if (s == ' ' || s == '\t')
 		return (1);
@@ -74,11 +74,11 @@ int wspace(char s)
 }
 
 /**
- * remwspaces - remove white spaces
+ * removewspaces - remove white spaces
  * @s: string to be checked
  */
 
-void remwspaces(char *s)
+void removewspaces(char *s)
 {
 	int length = str_len(s);
 	int i = 0, j = length - 1, k;
@@ -87,11 +87,11 @@ void remwspaces(char *s)
 	if (s == NULL)
 		return;
 
-	while (i < length && wspace(s[i]))
+	while (i < length && whitespace(s[i]))
 	{
 		i++;
 	}
-	while (j >= i && wspace(s[j]))
+	while (j >= i && whitespace(s[j]))
 	{
 		j--;
 	}
