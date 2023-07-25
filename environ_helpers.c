@@ -1,11 +1,11 @@
 #include "main.h"
 /**
- * add_env_var - Add a new environment variable to the linked list.
+ * add_new_env_var - Add a new environment variable to the linked list.
  * @head: A pointer to the head of the linked list.
  * @name: The name of the environment variable.
  * @value: The value of the environment variable.
  */
-void add_env_var(struct Node **head, const char *name, const char *value)
+void add_new_env_var(struct Node **head, const char *name, const char *value)
 {
 	size_t name_l = str_len(name);
 	size_t value_len = str_len(value);
@@ -37,10 +37,10 @@ void add_env_var(struct Node **head, const char *name, const char *value)
 }
 
 /**
- * update_environ - Update the environ variable with the linked list contents.
+ * update_env - Update the environ variable with the linked list contents.
  * @head: The head of the linked list.
  */
-void update_environ(struct Node *head)
+void update_env(struct Node *head)
 {
 	size_t count = 0;
 	size_t i;

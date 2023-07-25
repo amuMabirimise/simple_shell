@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * print_list - Print the contents of the linked list.
+ * print_llist - Print the contents of the linked list.
  * @head: The head of the linked list.
  */
-void print_list(struct Node *head)
+void print_llist(struct Node *head)
 {
 	while (head != NULL)
 	{
@@ -15,10 +15,10 @@ void print_list(struct Node *head)
 }
 
 /**
- * free_list - Free up memory allocated for each node in the linked list.
+ * free_llist - Free up memory allocated for each node in the linked list.
  * @head: The head of the linked list.
  */
-void free_list(struct Node *head)
+void free_llist(struct Node *head)
 {
 	struct Node *temp;
 
@@ -31,11 +31,11 @@ void free_list(struct Node *head)
 }
 
 /**
- * _env - Print the environment variables.
+ * env_cust - Print the environment variables.
  *
  * Return: Always 0.
  */
-int _env(void)
+int env_cust(void)
 {
 	char **env;
 	struct Node *head = NULL;
@@ -45,20 +45,20 @@ int _env(void)
 		add_node(&head, new_node(*env));
 	}
 
-	print_list(head);
+	print_llist(head);
 
-	free_list(head);
+	free_llist(head);
 	return (0);
 }
 
 /**
- * _setenv - Set an environment variable.
+ * setenv_cust - Set an environment variable.
  * @name: The name of the environment variable.
  * @value: The value to be set.
  *
  * Return: Always 0.
  */
-int _setenv(const char *name, const char *value)
+int setenv_cust(const char *name, const char *value)
 {
 	char **env;
 	struct Node *head = NULL;
@@ -69,21 +69,21 @@ int _setenv(const char *name, const char *value)
 		add_node(&head, new_node(*env));
 	}
 
-	add_env_var(&head, name, value);
+	add_new_env_var(&head, name, value);
 
-	update_environ(head);
+	update_env(head);
 
-	free_list(head);
+	free_llist(head);
 	return (0);
 }
 
 /**
- * _unsetenv - Delete an environment variable.
+ * unsetenv_cust - Delete an environment variable.
  * @name: The name of the environment variable to be deleted.
  *
  * Return: 0 on success, -1 on failure.
  */
-int _unsetenv(const char *name)
+int unsetenv_cust(const char *name)
 {
 	char **e;
 	char **env;

@@ -28,7 +28,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 			exit(ex_code);
 		if (cmd[0] == '\0' || (str_cmp(cmd, "\n") == 0))
 			continue;
-		removewspaces(cmd);
+		rmwspaces(cmd);
 		cmd_copy = strdup(cmd);
 		tokenize_str(cmd_copy, ar);
 		tokenize_str(cmd, argv);
@@ -59,26 +59,28 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 }
 
 /**
- * whitespace - check character space or tab
+ * white_space - check character space or tab
  * @s: character to be checked
  *
  * Return: 1 if successful or 0 if not.
  */
 
-int whitespace(char s)
+int white_space(char s)
 {
 	if (s == ' ' || s == '\t')
+	{
 		return (1);
+	}
 
 	return (0);
 }
 
 /**
- * removewspaces - remove white spaces
+ * rmwspaces - remove white spaces
  * @s: string to be checked
  */
 
-void removewspaces(char *s)
+void rmwspaces(char *s)
 {
 	int length = str_len(s);
 	int i = 0, j = length - 1, k;
@@ -87,14 +89,10 @@ void removewspaces(char *s)
 	if (s == NULL)
 		return;
 
-	while (i < length && whitespace(s[i]))
-	{
+	while (i < length && white_space(s[i]))
 		i++;
-	}
-	while (j >= i && whitespace(s[j]))
-	{
+	while (j >= i && white_space(s[j]))
 		j--;
-	}
 	k = 0;
 	while (i <= j)
 	{
@@ -128,14 +126,14 @@ char *read_stdin_input(void)
 {
 	char *cmd1 = getline_cust();
 
-	signal(SIGINT, handle_sigint);
+	signal(SIGINT, sigint_handle);
 	return (cmd1);
 }
 /**
- * handle_sigint - Signal handler for SIGINT (Ctrl+C).
+ * sigint_handle - Signal handler for SIGINT (Ctrl+C).
  * @signo: The signal number.
  */
-void handle_sigint(int signo __attribute__((unused)))
+void sigint_handle(int signo __attribute__((unused)))
 {
 	write(1, "\n", 1);
 	if (cmd != NULL)

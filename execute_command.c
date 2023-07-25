@@ -17,7 +17,7 @@ void _exec(char **_argum, char *av, int count)
 	ex_code = 0;
 	if (_argum[0][0] == '/')
 	{
-		if (access_check(_argum, NULL, err, count, environ))
+		if (access_file_check(_argum, NULL, err, count, environ))
 			return;
 	}
 	else
@@ -27,17 +27,17 @@ void _exec(char **_argum, char *av, int count)
 			cmd1 = find_executable(_argum[0]);
 			if (cmd1 == NULL)
 			{
-				_perror(err, count, _argum[0]);
+				print_error(err, count, _argum[0]);
 				return;
 			}
-			if (access_check(_argum, cmd1, err, count, environ))
+			if (access_file_check(_argum, cmd1, err, count, environ))
 				return;
 			free(cmd1);
 		}
 		else
 		{
 			cmd1 = _argum[0];
-			if (access_check(_argum, cmd1, err, count, environ))
+			if (access_file_check(_argum, cmd1, err, count, environ))
 				return;
 		}
 	}
@@ -49,13 +49,13 @@ void _exec(char **_argum, char *av, int count)
 }
 
 /**
- * _execve - runs error code and exec
+ * execve_cust - runs error code and exec
  * @c: command prompt
  * @p: arguments to command
  * @r: environment variable
  */
 
-void _execve(char *c, char **p, char **r)
+void execve_cust(char *c, char **p, char **r)
 {
 	if ((execve(c, p, r) == -1))
 		ex_code = 127;
@@ -63,45 +63,45 @@ void _execve(char *c, char **p, char **r)
 }
 
 /**
- * _perror - printing error and checking exit code
+ * print_error - printing error and checking exit code
  * @err: error string
  * @count: number of command
  * @c: name of file
  */
 
-void _perror(char *err, int count, char *c)
+void print_error(char *err, int count, char *c)
 {
 	ex_code = 127;
-	_print(err);
-	_print(": ");
-	_pnumber(count);
-	_print(": ");
-	_print(c);
-	_print(": not found\n");
+	print_cust(err);
+	print_cust(": ");
+	print_number(count);
+	print_cust(": ");
+	print_cust(c);
+	print_cust(": not found\n");
 }
 
 /**
- * _print - prints a character
+ * print_cust - prints a character
  * @s: string input
  */
 
-void _print(char *s)
+void print_cust(char *s)
 {
 	int i = 0;
 
 	while (s[i] != '\0')
 	{
-		_putchar(s[i]);
+		putchar_cust(s[i]);
 		i++;
 	}
 }
 
 /**
- * _pnumber - print number
+ * print_number - print number
  * @n: integer
  */
 
-void _pnumber(int n)
+void print_number(int n)
 {
 	int first = n, count = 0, x = 1, i, tmp;
 
@@ -109,7 +109,7 @@ void _pnumber(int n)
 
 	if (n < 0)
 	{
-		_putchar('-');
+		putchar_cust('-');
 		n = (n * -1) - 1;
 	}
 	while (first != 0)
@@ -127,11 +127,11 @@ void _pnumber(int n)
 			i++;
 		}
 		if (tmp < 0 && x == count)
-			_putchar(((first % 10) + 48) + 1);
+			putchar_cust(((first % 10) + 48) + 1);
 		else
-			_putchar((first % 10) + 48);
+			putchar_cust((first % 10) + 48);
 		x++;
 	}
 	if (count == 0)
-		_putchar('0');
+		putchar_cust('0');
 }

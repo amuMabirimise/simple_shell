@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * access_check - checks file access
+ * access_file_check - checks file access
  * @arg: command arg
  * @cmd: command arg
  * @err: error string
@@ -11,7 +11,7 @@
  * Return: 0 if success, 1 otherwise
  */
 
-int access_check(char **arg, char *cmd, char *err, int c, char **e)
+int access_file_check(char **arg, char *cmd, char *err, int c, char **e)
 {
 	pid_t idcheck;
 	char *p = NULL;
@@ -22,24 +22,24 @@ int access_check(char **arg, char *cmd, char *err, int c, char **e)
 		idcheck = fork();
 		if (idcheck == 0)
 		{
-			_execve(p, arg, e);
+			execve_cust(p, arg, e);
 		}
 		return (0);
 	}
 	else
 	{
-		_perror(err, c, p);
+		print_error(err, c, p);
 		return (1);
 	}
 }
 
 /**
- * _putchar - writes the character c to stdout
+ * putchar_cust - writes the character c to stdout
  * @c: character to print
  * Return: 1 on success
  */
 
-int _putchar(char c)
+int putchar_cust(char c)
 {
 	return (write(2, &c, 1));
 }

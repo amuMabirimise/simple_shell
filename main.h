@@ -117,23 +117,23 @@ void print_alias(alias_t *alias);
 void set_new_alias(alias_t **aliases, char *name, char *value);
 void print_all_aliases(alias_t *aliases);
 
-void _execve(char *c, char **p, char **r);
-void _perror(char *err, int count, char *c);
-void _print(char *s);
-void _pnumber(int n);
-int _putchar(char c);
-int access_check(char **arg, char *cmd, char *err, int c, char **e);
-void _perrore(char *err, int count, char *c, char *arg);
-void print_list(struct Node *head);
-void free_list(struct Node *head);
-int _env(void);
-int _unsetenv(const char *name);
-int _setenv(const char *name, const char *value);
-void add_env_var(struct Node **head, const char *name, const char *value);
-void update_environ(struct Node *head);
-void handle_sigint(int signo __attribute__((unused)));
-void removewspaces(char *s);
-int whitespace(char s);
+void execve_cust(char *c, char **p, char **r);
+void print_error(char *err, int count, char *c);
+void print_cust(char *s);
+void print_number(int n);
+int putchar_cust(char c);
+int access_file_check(char **arg, char *cmd, char *err, int c, char **e);
+void print_errore(char *err, int count, char *c, char *arg);
+void print_llist(struct Node *head);
+void free_llist(struct Node *head);
+int env_cust(void);
+int unsetenv_cust(const char *name);
+int setenv_cust(const char *name, const char *value);
+void add_new_env_var(struct Node **head, const char *name, const char *value);
+void update_env(struct Node *head);
+void sigint_handle(int signo __attribute__((unused)));
+void rmwspaces(char *s);
+int white_space(char s);
 
 
 
